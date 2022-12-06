@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+</head>
+<body>
+
+    <button onclick="addContent()">추가</button>
+
+<script type="module">
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
+import { getFirestore , collection, getDocs ,addDoc} from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyCnYJTa63-PRm899pb_va79ndU68Jkt_r8",
+    authDomain: "myworks-f1205.firebaseapp.com",
+    projectId: "myworks-f1205",
+    storageBucket: "myworks-f1205.appspot.com",
+    messagingSenderId: "248734016315",
+    appId: "1:248734016315:web:2259b601c7bd4ea68bcd1e",
+    measurementId: "G-KE1P2B2HB8"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+console.log(analytics);
+
+const db = getFirestore(app);
+
+console.log(db);
+
+const querySnapshot = await getDocs(collection(db, "test"));
+console.log(querySnapshot);
+querySnapshot.forEach((doc) => {
+  console.log(`${doc.id} => ${doc.data().title} : ${doc.data().content}`);
+});
+
+
+
+
+try {
+    const docRef = await addDoc(collection(db, "test"), {
+        title: "Alan",
+        content: "Mathison"
+    });
+
+    console.log("쓰기 성공: ", docRef.id , docRef);
+} catch (e) {
+    console.error("Error adding document: ", e);
+}
+const addContent = function(e) {
+
+
+    console.log("DFSA");
+
+}
+</script>
+</body>
+</html>
